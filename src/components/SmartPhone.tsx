@@ -1,40 +1,12 @@
-import { Table } from "antd";
-import { useTable } from "../hooks/useTable";
-  
-const columns = [
-  {
-    title: 'Id',
-    dataIndex: 'id',
-    key: 'id',
-  },
-  {
-    title: 'Title',
-    dataIndex: 'title',
-    key: 'title',
-  },
-];
+import ElectronicTable from "./ElectronicTable";
 
-
+const link = "https://66a9fc2b613eced4eba713e8.mockapi.io/electronic/smartphone"
 function SmartPhone() {
-  const { dataSource, setPage } = useTable({
-    url: 'https://jsonplaceholder.typicode.com/todos'
-  });
-
+  
   return (
-    <Table 
-      dataSource={dataSource} 
-      columns={columns} 
-      pagination={{
-        total: 100,
-        onChange: (page: number, pageSize: number) => {
-          setPage(page)
-        },
-        onShowSizeChange: (current: number, size: number) => {
-          console.log('onShowSizeChange: ', current, size)
-        }
-      }}
-    
-    />
+    <>
+      <ElectronicTable link={link} count={50}/>
+    </>
   )
 }
 

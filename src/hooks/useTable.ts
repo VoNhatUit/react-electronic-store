@@ -7,11 +7,11 @@ type IProps = {
 
 export const useTable = ({ url }: IProps) => {
   const [dataSource, setDataSource] = React.useState([]);
-  const [page, setPage] = React.useState(1);
-
+  const [page, setPage] = React.useState(0);
+  const [limit, setLimit] = React.useState(10);
   React.useEffect(() => {
     async function fetchData() {
-      const res = await fetch(`${url}?_limit=3&_page=${page}`)
+      const res = await fetch(`${url}?limit=${limit}&page=${page + 1}`)
       const data = await res.json();
       const result = data.map((item: ISmartPhone, index: number) => {
         return {
@@ -22,10 +22,13 @@ export const useTable = ({ url }: IProps) => {
       setDataSource(result);
     }
     fetchData();
-  }, [page])
+  }, [page, limit])
 
   return {
     dataSource,
-    setPage
+    page,
+    limit,
+    setPage,
+    setLimit,
   }
 }
